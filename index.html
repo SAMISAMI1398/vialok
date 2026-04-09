@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIALOK — Absolute Security. Instant Inventory.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: {
+            electric: '#0066FF',
+            'electric-light': '#3385FF',
+            'electric-dim': '#003999',
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-in': 'fadeIn 1s ease-out forwards',
+            'scan': 'scan 3s linear infinite',
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            scan: { '0%': { transform: 'translateY(-100%)' }, '100%': { transform: 'translateY(400%)' } },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { background: #000; color: #fff; font-family: 'Inter', sans-serif; }
+
+    /* Grid overlay */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,102,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,102,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Electric glow effects */
+    .glow-blue { box-shadow: 0 0 30px rgba(0,102,255,0.3), 0 0 60px rgba(0,102,255,0.1); }
+    .glow-text { text-shadow: 0 0 40px rgba(0,102,255,0.6); }
+    .btn-glow { box-shadow: 0 0 20px rgba(0,102,255,0.5), inset 0 0 20px rgba(0,102,255,0.05); }
+    .btn-glow:hover { box-shadow: 0 0 40px rgba(0,102,255,0.8), inset 0 0 30px rgba(0,102,255,0.1); }
+
+    /* Scan line animation */
+    .scan-container { position: relative; overflow: hidden; }
+    .scan-line {
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,102,255,0.8), transparent);
+      animation: scan 3s linear infinite;
+    }
+
+    /* Card border gradient */
+    .card-border {
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+    .card-border::before {
+      content: '';
+      position: absolute; inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(0,102,255,0.4) 0%, rgba(0,102,255,0.05) 50%, rgba(0,102,255,0.2) 100%);
+      z-index: -1;
+    }
+
+    /* Number counter style */
+    .stat-number { font-variant-numeric: tabular-nums; }
+
+    /* Noise texture overlay */
+    .noise::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: 0.4;
+    }
+
+    /* Horizontal rule gradient */
+    .rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,102,255,0.5), transparent); }
+
+    /* Input focus */
+    input:focus, textarea:focus { outline: none; }
+
+    /* Typewriter cursor */
+    .cursor::after { content: '_'; animation: blink 1s step-end infinite; color: #0066FF; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Scroll reveal base */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="antialiased grid-bg noise relative">
+
+  <!-- ─────────────────────────────────────────── NAV ─── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-md bg-black/70">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 relative">
+          <div class="absolute inset-0 border border-electric/60 rotate-45 glow-blue"></div>
+          <div class="absolute inset-1.5 bg-electric/20 rotate-45"></div>
+        </div>
+        <span class="text-white font-bold text-lg tracking-[0.2em] uppercase">VIALOK</span>
+      </div>
+
+      <!-- Nav links -->
+      <div class="hidden md:flex items-center gap-8 text-xs font-medium tracking-widest uppercase text-white/40">
+        <a href="#problem" class="hover:text-electric transition-colors">System</a>
+        <a href="#solution" class="hover:text-electric transition-colors">Intelligence</a>
+        <a href="#contact" class="hover:text-electric transition-colors">Deploy</a>
+      </div>
+
+      <!-- CTA -->
+      <a href="#contact"
+         class="hidden md:inline-flex items-center gap-2 px-4 py-2 border border-electric/40 text-electric text-xs font-semibold tracking-widest uppercase hover:bg-electric/10 transition-all btn-glow">
+        <span class="w-1.5 h-1.5 bg-electric rounded-full animate-pulse"></span>
+        Launch Pilot
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────────────────── HERO ─── -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden">
+
+    <!-- Background radial glow -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="w-[700px] h-[700px] rounded-full bg-electric/5 blur-[120px]"></div>
+    </div>
+    <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-electric/3 blur-[80px] pointer-events-none"></div>
+
+    <!-- Scan element -->
+    <div class="scan-container absolute inset-0 pointer-events-none">
+      <div class="scan-line opacity-30"></div>
+    </div>
+
+    <!-- Corner brackets -->
+    <div class="absolute top-24 left-8 w-8 h-8 border-t border-l border-electric/30"></div>
+    <div class="absolute top-24 right-8 w-8 h-8 border-t border-r border-electric/30"></div>
+    <div class="absolute bottom-8 left-8 w-8 h-8 border-b border-l border-electric/30"></div>
+    <div class="absolute bottom-8 right-8 w-8 h-8 border-b border-r border-electric/30"></div>
+
+    <!-- Status bar -->
+    <div class="relative flex items-center gap-2 mb-12 px-4 py-1.5 border border-white/10 bg-white/3 backdrop-blur-sm">
+      <span class="w-1.5 h-1.5 bg-electric rounded-full animate-pulse"></span>
+      <span class="text-xs font-mono tracking-[0.3em] uppercase text-white/40">System Online — Node v4.1.2</span>
+    </div>
+
+    <!-- Main heading -->
+    <div class="relative text-center max-w-5xl mx-auto">
+      <h1 class="font-black uppercase leading-none tracking-tight mb-6"
+          style="font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -0.02em;">
+        <span class="block text-white">Absolute</span>
+        <span class="block glow-text" style="color: #0066FF;">Security.</span>
+        <span class="block text-white">Instant Inventory.</span>
+      </h1>
+
+      <div class="rule my-8 max-w-xs mx-auto"></div>
+
+      <p class="text-white/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto tracking-wide mb-12">
+        VIALOK is the <span class="text-white/70 font-medium">digital nervous system</span> of industrial logistics —
+        real-time asset tracking, autonomous inventory reconciliation,
+        and zero-blind-spot supply chain visibility.
+      </p>
+
+      <!-- CTA Button -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contact"
+           class="group relative inline-flex items-center gap-3 px-8 py-4 bg-electric text-white font-bold text-sm tracking-[0.2em] uppercase btn-glow hover:bg-electric-light transition-all duration-300 overflow-hidden">
+          <span class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Launch 50-Unit Pilot
+        </a>
+        <a href="#problem"
+           class="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white/40 hover:text-white hover:border-white/30 font-medium text-sm tracking-[0.15em] uppercase transition-all duration-300">
+          Explore System
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="relative mt-20 w-full max-w-4xl mx-auto border-t border-b border-white/5 py-6 grid grid-cols-3 gap-0">
+      <div class="text-center px-4 border-r border-white/5">
+        <div class="stat-number font-black text-3xl md:text-4xl text-electric glow-text">98.7<span class="text-xl">%</span></div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Accuracy Rate</div>
+      </div>
+      <div class="text-center px-4 border-r border-white/5">
+        <div class="stat-number font-black text-3xl md:text-4xl text-white">&lt;2<span class="text-xl">s</span></div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Scan Latency</div>
+      </div>
+      <div class="text-center px-4">
+        <div class="stat-number font-black text-3xl md:text-4xl text-white">50K<span class="text-xl">+</span></div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Assets Tracked</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────── PROBLEM ─── -->
+  <section id="problem" class="relative py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Section label -->
+      <div class="flex items-center gap-4 mb-16 reveal">
+        <div class="w-8 h-px bg-electric"></div>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">01 — Critical Failures</span>
+      </div>
+
+      <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight text-white mb-4 reveal">
+        The System<br /><span class="text-white/20">is Broken.</span>
+      </h2>
+      <p class="text-white/30 text-lg max-w-xl mb-20 reveal">
+        Legacy logistics infrastructure costs industries billions every year. Three systemic failures, one solution.
+      </p>
+
+      <!-- Problem cards -->
+      <div class="grid md:grid-cols-3 gap-px bg-white/5">
+
+        <!-- Card 1 — Vol -->
+        <div class="relative bg-black p-10 group hover:bg-white/2 transition-all duration-500 reveal card-border">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-electric/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div class="mb-8">
+            <div class="w-12 h-12 border border-electric/30 flex items-center justify-center mb-6 group-hover:border-electric/60 group-hover:glow-blue transition-all duration-300">
+              <svg class="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 01</span>
+          </div>
+
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Theft &amp;<br/>Shrinkage</h3>
+          <div class="rule mb-6"></div>
+          <p class="text-white/35 text-sm leading-relaxed">
+            Up to <span class="text-white/70 font-semibold">3% of annual inventory</span> disappears annually across warehouses and transit routes. No alerts. No accountability. No recovery.
+          </p>
+
+          <div class="mt-8 flex items-center gap-2">
+            <span class="text-3xl font-black text-white/10">€2.1B</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider">lost / year in EU</span>
+          </div>
+        </div>
+
+        <!-- Card 2 — Inventaire -->
+        <div class="relative bg-black p-10 group hover:bg-white/2 transition-all duration-500 reveal card-border" style="transition-delay: 0.1s">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-electric/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div class="mb-8">
+            <div class="w-12 h-12 border border-electric/30 flex items-center justify-center mb-6 group-hover:border-electric/60 transition-all duration-300">
+              <svg class="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+            </div>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 02</span>
+          </div>
+
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Manual<br/>Inventory</h3>
+          <div class="rule mb-6"></div>
+          <p class="text-white/35 text-sm leading-relaxed">
+            Teams spend <span class="text-white/70 font-semibold">40+ hours per month</span> on manual counts. Human error rates exceed 10%. Your data is always out of date before the ink dries.
+          </p>
+
+          <div class="mt-8 flex items-center gap-2">
+            <span class="text-3xl font-black text-white/10">480h</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider">wasted / year</span>
+          </div>
+        </div>
+
+        <!-- Card 3 — Opacité -->
+        <div class="relative bg-black p-10 group hover:bg-white/2 transition-all duration-500 reveal card-border" style="transition-delay: 0.2s">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-electric/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div class="mb-8">
+            <div class="w-12 h-12 border border-electric/30 flex items-center justify-center mb-6 group-hover:border-electric/60 transition-all duration-300">
+              <svg class="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+              </svg>
+            </div>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 03</span>
+          </div>
+
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Supply Chain<br/>Opacity</h3>
+          <div class="rule mb-6"></div>
+          <p class="text-white/35 text-sm leading-relaxed">
+            Zero real-time visibility across transit nodes. Decisions made on <span class="text-white/70 font-semibold">48-hour-old data</span>. Disruptions cascade silently until it's too late to respond.
+          </p>
+
+          <div class="mt-8 flex items-center gap-2">
+            <span class="text-3xl font-black text-white/10">72h</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider">avg. detection lag</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────── SOLUTION ─── -->
+  <section id="solution" class="relative py-32 px-6 overflow-hidden">
+
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-electric/3 to-black pointer-events-none"></div>
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-electric/5 blur-[100px] pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-16 reveal">
+        <div class="w-8 h-px bg-electric"></div>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">02 — VIALOK Intelligence</span>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-20 items-center">
+        <!-- Left: text -->
+        <div>
+          <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight leading-none mb-8 reveal">
+            One Platform.<br/>
+            <span class="text-electric glow-text">Total</span><br/>
+            Control.
+          </h2>
+          <p class="text-white/40 text-base leading-relaxed mb-10 reveal">
+            VIALOK deploys a mesh of RFID/IoT sensors across your entire operation, feeding a real-time intelligence engine that sees everything — from dock to destination.
+          </p>
+
+          <!-- Feature list -->
+          <div class="space-y-5 reveal">
+            <div class="flex items-start gap-4 group">
+              <div class="mt-1 w-5 h-5 border border-electric/40 flex items-center justify-center flex-shrink-0 group-hover:border-electric transition-colors">
+                <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1">Autonomous RFID Mesh</div>
+                <div class="text-white/30 text-xs leading-relaxed">Self-organizing sensor network — no manual scan, no human loop. Continuous, sub-second asset awareness.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 group">
+              <div class="mt-1 w-5 h-5 border border-electric/40 flex items-center justify-center flex-shrink-0 group-hover:border-electric transition-colors">
+                <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1">Anomaly Detection Engine</div>
+                <div class="text-white/30 text-xs leading-relaxed">Machine learning baseline trained on your flow patterns. Unauthorized movement triggers instant alerts.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 group">
+              <div class="mt-1 w-5 h-5 border border-electric/40 flex items-center justify-center flex-shrink-0 group-hover:border-electric transition-colors">
+                <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1">Live Operations Dashboard</div>
+                <div class="text-white/30 text-xs leading-relaxed">Single pane of glass: inventory levels, asset location, flow velocity and exception reports — in real time.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 group">
+              <div class="mt-1 w-5 h-5 border border-electric/40 flex items-center justify-center flex-shrink-0 group-hover:border-electric transition-colors">
+                <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1">ERP / WMS Integration</div>
+                <div class="text-white/30 text-xs leading-relaxed">REST API + native connectors for SAP, Oracle, Odoo and 30+ platforms. No rip-and-replace required.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: terminal/visual -->
+        <div class="reveal">
+          <div class="border border-white/10 bg-black/80 backdrop-blur-sm p-0 scan-container">
+            <div class="scan-line opacity-20"></div>
+
+            <!-- Terminal header -->
+            <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/2">
+              <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-green-500/60"></div>
+              <span class="ml-4 text-white/20 text-xs font-mono tracking-widest">vialok-node — live-feed</span>
+            </div>
+
+            <!-- Terminal body -->
+            <div class="p-6 font-mono text-xs space-y-2 min-h-[340px]">
+              <div class="text-white/20">$ vialok connect --site=WAREHOUSE-A --nodes=50</div>
+              <div class="text-electric/80">→ Mesh initialized. 50 nodes online.</div>
+              <div class="text-white/20 mt-3">[12:04:01] SCAN  SKU-8821-X  ZONE-A3  ✓</div>
+              <div class="text-white/20">[12:04:01] SCAN  SKU-3390-K  ZONE-B1  ✓</div>
+              <div class="text-white/20">[12:04:02] SCAN  SKU-0019-F  ZONE-A3  ✓</div>
+              <div class="text-yellow-400/80">[12:04:03] ALERT SKU-7741-R  MOVEMENT OUTSIDE PERIMETER</div>
+              <div class="text-electric/80">[12:04:03] LOCK  Gate-7 triggered. Security notified.</div>
+              <div class="text-white/20">[12:04:04] SCAN  SKU-2201-D  TRANSIT  ✓</div>
+              <div class="text-white/20">[12:04:04] SCAN  SKU-9982-A  ZONE-C2  ✓</div>
+              <div class="text-green-400/80">[12:04:05] SYNC  ERP updated — 1,247 SKUs reconciled.</div>
+              <div class="text-white/20 mt-3">$ inventory --snapshot</div>
+              <div class="text-electric/80">→ 12,847 / 12,891 assets tracked  <span class="text-white/30">(99.6%)</span></div>
+              <div class="text-electric/80 cursor">→ Discrepancies: 44 flagged</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────── DIVIDER ─── -->
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="rule"></div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── CTA ─── -->
+  <section id="contact" class="relative py-32 px-6 overflow-hidden">
+
+    <!-- Background glow -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-electric/5 blur-[120px] pointer-events-none rounded-full"></div>
+
+    <div class="relative max-w-3xl mx-auto">
+      <div class="flex items-center gap-4 mb-12 reveal">
+        <div class="w-8 h-px bg-electric"></div>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">03 — Deploy VIALOK</span>
+      </div>
+
+      <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight leading-none mb-6 reveal">
+        Schedule Your<br/>
+        <span class="text-electric glow-text">Free Audit.</span>
+      </h2>
+      <p class="text-white/30 text-base leading-relaxed mb-12 max-w-xl reveal">
+        Our engineers will assess your current operations and design a custom 50-unit pilot deployment. No commitment. Full transparency.
+      </p>
+
+      <!-- Form -->
+      <form class="space-y-4 reveal" onsubmit="handleSubmit(event)">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="relative group">
+            <input
+              type="text"
+              placeholder="Company name"
+              required
+              class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
+            />
+          </div>
+          <div class="relative group">
+            <input
+              type="text"
+              placeholder="Your name"
+              required
+              class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
+            />
+          </div>
+        </div>
+        <div class="relative group">
+          <input
+            type="email"
+            placeholder="Professional email"
+            required
+            class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
+          />
+        </div>
+        <div class="relative group">
+          <select
+            class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white/40 text-sm focus:border-electric/50 focus:bg-white/5 transition-all duration-300 appearance-none cursor-pointer"
+            style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.2)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1.25rem center; background-size: 1rem;"
+          >
+            <option value="" disabled selected>Operation size</option>
+            <option class="bg-black text-white">Small — 1 warehouse (&lt;500 SKUs)</option>
+            <option class="bg-black text-white">Medium — 2–5 sites (500–10K SKUs)</option>
+            <option class="bg-black text-white">Large — 5+ sites (10K+ SKUs)</option>
+            <option class="bg-black text-white">Enterprise — Multi-country distribution</option>
+          </select>
+        </div>
+        <div class="relative group">
+          <textarea
+            rows="4"
+            placeholder="Describe your current challenge (optional)"
+            class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20 resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+          <p class="text-white/15 text-xs leading-relaxed max-w-xs">
+            Your data is encrypted and never shared. Response within 24h.
+          </p>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="group relative inline-flex items-center gap-3 px-8 py-4 bg-electric text-white font-bold text-sm tracking-[0.2em] uppercase btn-glow hover:bg-electric-light transition-all duration-300 overflow-hidden flex-shrink-0"
+          >
+            <span class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            Request Audit
+          </button>
+        </div>
+      </form>
+
+      <!-- Success message (hidden by default) -->
+      <div id="success-msg" class="hidden mt-6 p-6 border border-electric/30 bg-electric/5">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 border border-electric flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-white font-semibold text-sm">Request received.</div>
+            <div class="text-white/40 text-xs mt-0.5">Our team will reach out within 24 hours.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────── FOOTER ─── -->
+  <footer class="border-t border-white/5 py-10 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-5 h-5 relative">
+          <div class="absolute inset-0 border border-electric/40 rotate-45"></div>
+          <div class="absolute inset-1 bg-electric/20 rotate-45"></div>
+        </div>
+        <span class="text-white/40 font-bold text-sm tracking-[0.2em] uppercase">VIALOK</span>
+      </div>
+      <p class="text-white/15 text-xs tracking-widest font-mono uppercase">
+        © 2026 VIALOK — All systems operational
+      </p>
+      <div class="flex items-center gap-6 text-white/20 text-xs tracking-widest uppercase">
+        <a href="#" class="hover:text-white/50 transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white/50 transition-colors">Legal</a>
+        <a href="mailto:contact@vialok.io" class="hover:text-electric transition-colors">contact@vialok.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─────────────────────────────────── JAVASCRIPT ─── -->
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Sending...`;
+      setTimeout(() => {
+        e.target.style.display = 'none';
+        document.getElementById('success-msg').classList.remove('hidden');
+      }, 1500);
+    }
+
+    // Smooth nav active state
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('text-electric', link.getAttribute('href') === `#${current}`);
+        link.classList.toggle('text-white/40', link.getAttribute('href') !== `#${current}`);
+      });
+    });
+  </script>
+</body>
+</html>
