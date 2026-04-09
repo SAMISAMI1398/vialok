@@ -118,6 +118,14 @@
         <a href="#contact" class="hover:text-electric transition-colors">Deploy</a>
       </div>
 
+      <!-- Lang switcher -->
+      <div class="flex items-center gap-1">
+        <button id="lang-fr" onclick="switchLang('fr')"
+          class="px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white">FR</button>
+        <button id="lang-en" onclick="switchLang('en')"
+          class="px-3 py-1 rounded-full text-xs font-bold text-gray-400 hover:text-white">EN</button>
+      </div>
+
       <!-- CTA -->
       <a href="#contact"
          class="hidden md:inline-flex items-center gap-2 px-4 py-2 border border-electric/40 text-electric text-xs font-semibold tracking-widest uppercase hover:bg-electric/10 transition-all btn-glow">
@@ -157,9 +165,9 @@
     <div class="relative text-center max-w-5xl mx-auto">
       <h1 class="font-black uppercase leading-none tracking-tight mb-6"
           style="font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -0.02em;">
-        <span class="block text-white">Absolute</span>
-        <span class="block glow-text" style="color: #0066FF;">Security.</span>
-        <span class="block text-white">Instant Inventory.</span>
+        <span class="block text-white" data-fr="Sécurité" data-en="Absolute">Sécurité</span>
+        <span class="block glow-text" style="color: #0066FF;" data-fr="Absolue." data-en="Security.">Absolue.</span>
+        <span class="block text-white" data-fr="Inventaire Instantané." data-en="Instant Inventory.">Inventaire Instantané.</span>
       </h1>
 
       <div class="rule my-8 max-w-xs mx-auto"></div>
@@ -573,6 +581,26 @@
         link.classList.toggle('text-white/40', link.getAttribute('href') !== `#${current}`);
       });
     });
+  </script>
+
+  <script>
+  function switchLang(lang) {
+    const elements = document.querySelectorAll('[data-fr]');
+    elements.forEach(el => {
+      el.innerText = el.getAttribute('data-' + lang);
+    });
+
+    const btnFr = document.getElementById('lang-fr');
+    const btnEn = document.getElementById('lang-en');
+
+    if (lang === 'fr') {
+      btnFr.className = "px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white";
+      btnEn.className = "px-3 py-1 rounded-full text-xs font-bold text-gray-400 hover:text-white";
+    } else {
+      btnEn.className = "px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white";
+      btnFr.className = "px-3 py-1 rounded-full text-xs font-bold text-gray-400 hover:text-white";
+    }
+  }
   </script>
 </body>
 </html>
