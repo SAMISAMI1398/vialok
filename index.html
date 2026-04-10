@@ -257,9 +257,66 @@
         <span data-fr="Le Système" data-en="The System">The System</span><br />
         <span class="text-white/20" data-fr="est Défaillant." data-en="is Broken.">is Broken.</span>
       </h2>
-      <p class="text-white/30 text-lg max-w-xl mb-20 reveal" data-fr="L'infrastructure logistique héritée coûte des milliards aux industries chaque année. Trois défaillances systémiques, une seule solution." data-en="Legacy logistics infrastructure costs industries billions every year. Three systemic failures, one solution.">
-        Legacy logistics infrastructure costs industries billions every year. Three systemic failures, one solution.
+      <p class="text-white/70 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mb-10 reveal"
+         data-fr="Suivi intégral, de l'expédition à la détection d'ouverture. La sécurité de bout en bout pour moins de 1€ par colis."
+         data-en="End-to-end tracking, from shipment to opening detection. Complete security for less than €1 per package.">
+        End-to-end tracking, from shipment to opening detection. Complete security for less than €1 per package.
       </p>
+
+      <!-- Step flow: Expédition → Transit → Ouverture -->
+      <div class="flex flex-wrap items-center gap-0 mb-20 reveal">
+
+        <!-- Step 1 -->
+        <div class="flex items-center gap-3 px-5 py-3 border border-electric/30 bg-electric/5">
+          <svg class="w-5 h-5 text-electric flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          <span class="text-white/70 text-xs font-mono tracking-[0.25em] uppercase" data-fr="Expédition" data-en="Shipment">Shipment</span>
+        </div>
+
+        <!-- Arrow -->
+        <div class="flex items-center px-2">
+          <svg class="w-5 h-5 text-electric/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex items-center gap-3 px-5 py-3 border border-electric/30 bg-electric/5">
+          <svg class="w-5 h-5 text-electric flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+          </svg>
+          <span class="text-white/70 text-xs font-mono tracking-[0.25em] uppercase" data-fr="Transit" data-en="Transit">Transit</span>
+        </div>
+
+        <!-- Arrow -->
+        <div class="flex items-center px-2">
+          <svg class="w-5 h-5 text-electric/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex items-center gap-3 px-5 py-3 border border-electric/30 bg-electric/5">
+          <svg class="w-5 h-5 text-electric flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-white/70 text-xs font-mono tracking-[0.25em] uppercase" data-fr="Ouverture Détectée" data-en="Opening Detected">Opening Detected</span>
+        </div>
+
+        <!-- Check -->
+        <div class="flex items-center px-2">
+          <svg class="w-5 h-5 text-electric/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="flex items-center justify-center w-9 h-9 border border-electric/50 bg-electric/10 glow-blue">
+          <svg class="w-4 h-4 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+
+      </div>
 
       <!-- Problem cards -->
       <div class="grid md:grid-cols-3 gap-px bg-white/5">
