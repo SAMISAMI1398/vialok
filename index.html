@@ -113,9 +113,9 @@
 
       <!-- Nav links -->
       <div class="hidden md:flex items-center gap-8 text-xs font-medium tracking-widest uppercase text-white/40">
-        <a href="#problem" class="hover:text-electric transition-colors">System</a>
-        <a href="#solution" class="hover:text-electric transition-colors">Intelligence</a>
-        <a href="#contact" class="hover:text-electric transition-colors">Deploy</a>
+        <a href="#problem" class="hover:text-electric transition-colors" data-fr="Système" data-en="System">System</a>
+        <a href="#solution" class="hover:text-electric transition-colors" data-fr="Intelligence" data-en="Intelligence">Intelligence</a>
+        <a href="#contact" class="hover:text-electric transition-colors" data-fr="Déployer" data-en="Deploy">Deploy</a>
       </div>
 
       <!-- Lang switcher -->
@@ -130,7 +130,7 @@
       <a href="#contact"
          class="hidden md:inline-flex items-center gap-2 px-4 py-2 border border-electric/40 text-electric text-xs font-semibold tracking-widest uppercase hover:bg-electric/10 transition-all btn-glow">
         <span class="w-1.5 h-1.5 bg-electric rounded-full animate-pulse"></span>
-        Launch Pilot
+        <span data-fr="Lancer le Pilote" data-en="Launch Pilot">Launch Pilot</span>
       </a>
     </div>
   </nav>
@@ -158,7 +158,7 @@
     <!-- Status bar -->
     <div class="relative flex items-center gap-2 mb-12 px-4 py-1.5 border border-white/10 bg-white/3 backdrop-blur-sm">
       <span class="w-1.5 h-1.5 bg-electric rounded-full animate-pulse"></span>
-      <span class="text-xs font-mono tracking-[0.3em] uppercase text-white/40">System Online — Node v4.1.2</span>
+      <span class="text-xs font-mono tracking-[0.3em] uppercase text-white/40" data-fr="Système en Ligne — Nœud v4.1.2" data-en="System Online — Node v4.1.2">System Online — Node v4.1.2</span>
     </div>
 
     <!-- Main heading -->
@@ -173,9 +173,9 @@
       <div class="rule my-8 max-w-xs mx-auto"></div>
 
       <p class="text-white/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto tracking-wide mb-12">
-        VIALOK is the <span class="text-white/70 font-medium">digital nervous system</span> of industrial logistics —
+        <span data-fr='VIALOK est le <span class="text-white/70 font-medium">système nerveux numérique</span> de la logistique industrielle — suivi d&apos;actifs en temps réel, réconciliation autonome des stocks, et visibilité totale de la chaîne d&apos;approvisionnement.' data-en='VIALOK is the <span class="text-white/70 font-medium">digital nervous system</span> of industrial logistics — real-time asset tracking, autonomous inventory reconciliation, and zero-blind-spot supply chain visibility.'>VIALOK is the <span class="text-white/70 font-medium">digital nervous system</span> of industrial logistics —
         real-time asset tracking, autonomous inventory reconciliation,
-        and zero-blind-spot supply chain visibility.
+        and zero-blind-spot supply chain visibility.</span>
       </p>
 
       <!-- CTA Button -->
@@ -186,11 +186,11 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
-          Launch 50-Unit Pilot
+          <span data-fr="Lancer le Pilote 50 Unités" data-en="Launch 50-Unit Pilot">Launch 50-Unit Pilot</span>
         </a>
         <a href="#problem"
            class="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white/40 hover:text-white hover:border-white/30 font-medium text-sm tracking-[0.15em] uppercase transition-all duration-300">
-          Explore System
+          <span data-fr="Explorer le Système" data-en="Explore System">Explore System</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -202,15 +202,15 @@
     <div class="relative mt-20 w-full max-w-4xl mx-auto border-t border-b border-white/5 py-6 grid grid-cols-3 gap-0">
       <div class="text-center px-4 border-r border-white/5">
         <div class="stat-number font-black text-3xl md:text-4xl text-electric glow-text">98.7<span class="text-xl">%</span></div>
-        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Accuracy Rate</div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1" data-fr="Taux de Précision" data-en="Accuracy Rate">Accuracy Rate</div>
       </div>
       <div class="text-center px-4 border-r border-white/5">
         <div class="stat-number font-black text-3xl md:text-4xl text-white">&lt;2<span class="text-xl">s</span></div>
-        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Scan Latency</div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1" data-fr="Latence de Scan" data-en="Scan Latency">Scan Latency</div>
       </div>
       <div class="text-center px-4">
         <div class="stat-number font-black text-3xl md:text-4xl text-white">50K<span class="text-xl">+</span></div>
-        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1">Assets Tracked</div>
+        <div class="text-white/30 text-xs font-medium tracking-[0.2em] uppercase mt-1" data-fr="Actifs Suivis" data-en="Assets Tracked">Assets Tracked</div>
       </div>
     </div>
   </section>
@@ -222,13 +222,14 @@
       <!-- Section label -->
       <div class="flex items-center gap-4 mb-16 reveal">
         <div class="w-8 h-px bg-electric"></div>
-        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">01 — Critical Failures</span>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase" data-fr="01 — Défaillances Critiques" data-en="01 — Critical Failures">01 — Critical Failures</span>
       </div>
 
       <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight text-white mb-4 reveal">
-        The System<br /><span class="text-white/20">is Broken.</span>
+        <span data-fr="Le Système" data-en="The System">The System</span><br />
+        <span class="text-white/20" data-fr="est Défaillant." data-en="is Broken.">is Broken.</span>
       </h2>
-      <p class="text-white/30 text-lg max-w-xl mb-20 reveal">
+      <p class="text-white/30 text-lg max-w-xl mb-20 reveal" data-fr="L'infrastructure logistique héritée coûte des milliards aux industries chaque année. Trois défaillances systémiques, une seule solution." data-en="Legacy logistics infrastructure costs industries billions every year. Three systemic failures, one solution.">
         Legacy logistics infrastructure costs industries billions every year. Three systemic failures, one solution.
       </p>
 
@@ -245,18 +246,21 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
               </svg>
             </div>
-            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 01</span>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase" data-fr="Défaillance 01" data-en="Failure 01">Failure 01</span>
           </div>
 
-          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Theft &amp;<br/>Shrinkage</h3>
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">
+            <span data-fr="Vol &amp;" data-en="Theft &amp;">Theft &amp;</span><br/>
+            <span data-fr="Démarque" data-en="Shrinkage">Shrinkage</span>
+          </h3>
           <div class="rule mb-6"></div>
-          <p class="text-white/35 text-sm leading-relaxed">
+          <p class="text-white/35 text-sm leading-relaxed" data-fr='Jusqu&apos;à <span class="text-white/70 font-semibold">3% de l&apos;inventaire annuel</span> disparaît chaque année dans les entrepôts et les routes de transit. Aucune alerte. Aucune responsabilité. Aucune récupération.' data-en='Up to <span class="text-white/70 font-semibold">3% of annual inventory</span> disappears annually across warehouses and transit routes. No alerts. No accountability. No recovery.'>
             Up to <span class="text-white/70 font-semibold">3% of annual inventory</span> disappears annually across warehouses and transit routes. No alerts. No accountability. No recovery.
           </p>
 
           <div class="mt-8 flex items-center gap-2">
             <span class="text-3xl font-black text-white/10">€2.1B</span>
-            <span class="text-xs text-white/20 uppercase tracking-wider">lost / year in EU</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider" data-fr="perdu / an en UE" data-en="lost / year in EU">lost / year in EU</span>
           </div>
         </div>
 
@@ -270,18 +274,21 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
               </svg>
             </div>
-            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 02</span>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase" data-fr="Défaillance 02" data-en="Failure 02">Failure 02</span>
           </div>
 
-          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Manual<br/>Inventory</h3>
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">
+            <span data-fr="Inventaire" data-en="Manual">Manual</span><br/>
+            <span data-fr="Manuel" data-en="Inventory">Inventory</span>
+          </h3>
           <div class="rule mb-6"></div>
-          <p class="text-white/35 text-sm leading-relaxed">
+          <p class="text-white/35 text-sm leading-relaxed" data-fr='Les équipes consacrent <span class="text-white/70 font-semibold">40+ heures par mois</span> aux comptages manuels. Les taux d&apos;erreur humaine dépassent 10%. Vos données sont toujours obsolètes avant même que l&apos;encre sèche.' data-en='Teams spend <span class="text-white/70 font-semibold">40+ hours per month</span> on manual counts. Human error rates exceed 10%. Your data is always out of date before the ink dries.'>
             Teams spend <span class="text-white/70 font-semibold">40+ hours per month</span> on manual counts. Human error rates exceed 10%. Your data is always out of date before the ink dries.
           </p>
 
           <div class="mt-8 flex items-center gap-2">
             <span class="text-3xl font-black text-white/10">480h</span>
-            <span class="text-xs text-white/20 uppercase tracking-wider">wasted / year</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider" data-fr="gaspillé / an" data-en="wasted / year">wasted / year</span>
           </div>
         </div>
 
@@ -295,18 +302,21 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
               </svg>
             </div>
-            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase">Failure 03</span>
+            <span class="text-electric/60 text-xs font-mono tracking-[0.3em] uppercase" data-fr="Défaillance 03" data-en="Failure 03">Failure 03</span>
           </div>
 
-          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">Supply Chain<br/>Opacity</h3>
+          <h3 class="font-bold text-2xl text-white mb-4 uppercase tracking-tight">
+            <span data-fr="Opacité de la" data-en="Supply Chain">Supply Chain</span><br/>
+            <span data-fr="Chaîne Logistique" data-en="Opacity">Opacity</span>
+          </h3>
           <div class="rule mb-6"></div>
-          <p class="text-white/35 text-sm leading-relaxed">
+          <p class="text-white/35 text-sm leading-relaxed" data-fr='Zéro visibilité en temps réel sur les nœuds de transit. Décisions prises sur des <span class="text-white/70 font-semibold">données vieilles de 48h</span>. Les perturbations se cascadent silencieusement jusqu&apos;à ce qu&apos;il soit trop tard pour réagir.' data-en='Zero real-time visibility across transit nodes. Decisions made on <span class="text-white/70 font-semibold">48-hour-old data</span>. Disruptions cascade silently until it&apos;s too late to respond.'>
             Zero real-time visibility across transit nodes. Decisions made on <span class="text-white/70 font-semibold">48-hour-old data</span>. Disruptions cascade silently until it's too late to respond.
           </p>
 
           <div class="mt-8 flex items-center gap-2">
             <span class="text-3xl font-black text-white/10">72h</span>
-            <span class="text-xs text-white/20 uppercase tracking-wider">avg. detection lag</span>
+            <span class="text-xs text-white/20 uppercase tracking-wider" data-fr="délai moyen de détection" data-en="avg. detection lag">avg. detection lag</span>
           </div>
         </div>
       </div>
@@ -323,18 +333,18 @@
     <div class="relative max-w-7xl mx-auto">
       <div class="flex items-center gap-4 mb-16 reveal">
         <div class="w-8 h-px bg-electric"></div>
-        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">02 — VIALOK Intelligence</span>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase" data-fr="02 — Intelligence VIALOK" data-en="02 — VIALOK Intelligence">02 — VIALOK Intelligence</span>
       </div>
 
       <div class="grid md:grid-cols-2 gap-20 items-center">
         <!-- Left: text -->
         <div>
           <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight leading-none mb-8 reveal">
-            One Platform.<br/>
-            <span class="text-electric glow-text">Total</span><br/>
-            Control.
+            <span data-fr="Une Plateforme." data-en="One Platform.">One Platform.</span><br/>
+            <span class="text-electric glow-text" data-fr="Contrôle" data-en="Total">Total</span><br/>
+            <span data-fr="Total." data-en="Control.">Control.</span>
           </h2>
-          <p class="text-white/40 text-base leading-relaxed mb-10 reveal">
+          <p class="text-white/40 text-base leading-relaxed mb-10 reveal" data-fr="VIALOK déploie un réseau de capteurs RFID/IoT sur l'ensemble de votre opération, alimentant un moteur de renseignement en temps réel qui voit tout — du quai à la destination." data-en="VIALOK deploys a mesh of RFID/IoT sensors across your entire operation, feeding a real-time intelligence engine that sees everything — from dock to destination.">
             VIALOK deploys a mesh of RFID/IoT sensors across your entire operation, feeding a real-time intelligence engine that sees everything — from dock to destination.
           </p>
 
@@ -345,8 +355,8 @@
                 <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
               </div>
               <div>
-                <div class="text-white font-semibold text-sm tracking-wide mb-1">Autonomous RFID Mesh</div>
-                <div class="text-white/30 text-xs leading-relaxed">Self-organizing sensor network — no manual scan, no human loop. Continuous, sub-second asset awareness.</div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1" data-fr="Réseau RFID Autonome" data-en="Autonomous RFID Mesh">Autonomous RFID Mesh</div>
+                <div class="text-white/30 text-xs leading-relaxed" data-fr="Réseau de capteurs auto-organisé — aucun scan manuel, aucune boucle humaine. Conscience des actifs continue, en dessous de la seconde." data-en="Self-organizing sensor network — no manual scan, no human loop. Continuous, sub-second asset awareness.">Self-organizing sensor network — no manual scan, no human loop. Continuous, sub-second asset awareness.</div>
               </div>
             </div>
             <div class="flex items-start gap-4 group">
@@ -354,8 +364,8 @@
                 <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
               </div>
               <div>
-                <div class="text-white font-semibold text-sm tracking-wide mb-1">Anomaly Detection Engine</div>
-                <div class="text-white/30 text-xs leading-relaxed">Machine learning baseline trained on your flow patterns. Unauthorized movement triggers instant alerts.</div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1" data-fr="Moteur de Détection d'Anomalies" data-en="Anomaly Detection Engine">Anomaly Detection Engine</div>
+                <div class="text-white/30 text-xs leading-relaxed" data-fr="Base de référence d'apprentissage automatique entraînée sur vos schémas de flux. Tout mouvement non autorisé déclenche des alertes instantanées." data-en="Machine learning baseline trained on your flow patterns. Unauthorized movement triggers instant alerts.">Machine learning baseline trained on your flow patterns. Unauthorized movement triggers instant alerts.</div>
               </div>
             </div>
             <div class="flex items-start gap-4 group">
@@ -363,8 +373,8 @@
                 <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
               </div>
               <div>
-                <div class="text-white font-semibold text-sm tracking-wide mb-1">Live Operations Dashboard</div>
-                <div class="text-white/30 text-xs leading-relaxed">Single pane of glass: inventory levels, asset location, flow velocity and exception reports — in real time.</div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1" data-fr="Tableau de Bord Opérationnel en Direct" data-en="Live Operations Dashboard">Live Operations Dashboard</div>
+                <div class="text-white/30 text-xs leading-relaxed" data-fr="Vue unifiée : niveaux de stock, localisation des actifs, vélocité des flux et rapports d'exception — en temps réel." data-en="Single pane of glass: inventory levels, asset location, flow velocity and exception reports — in real time.">Single pane of glass: inventory levels, asset location, flow velocity and exception reports — in real time.</div>
               </div>
             </div>
             <div class="flex items-start gap-4 group">
@@ -372,8 +382,8 @@
                 <div class="w-1.5 h-1.5 bg-electric rounded-full"></div>
               </div>
               <div>
-                <div class="text-white font-semibold text-sm tracking-wide mb-1">ERP / WMS Integration</div>
-                <div class="text-white/30 text-xs leading-relaxed">REST API + native connectors for SAP, Oracle, Odoo and 30+ platforms. No rip-and-replace required.</div>
+                <div class="text-white font-semibold text-sm tracking-wide mb-1" data-fr="Intégration ERP / WMS" data-en="ERP / WMS Integration">ERP / WMS Integration</div>
+                <div class="text-white/30 text-xs leading-relaxed" data-fr="API REST + connecteurs natifs pour SAP, Oracle, Odoo et 30+ plateformes. Aucun remplacement complet requis." data-en="REST API + native connectors for SAP, Oracle, Odoo and 30+ platforms. No rip-and-replace required.">REST API + native connectors for SAP, Oracle, Odoo and 30+ platforms. No rip-and-replace required.</div>
               </div>
             </div>
           </div>
@@ -428,14 +438,14 @@
     <div class="relative max-w-3xl mx-auto">
       <div class="flex items-center gap-4 mb-12 reveal">
         <div class="w-8 h-px bg-electric"></div>
-        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase">03 — Deploy VIALOK</span>
+        <span class="text-electric text-xs font-mono tracking-[0.4em] uppercase" data-fr="03 — Déployer VIALOK" data-en="03 — Deploy VIALOK">03 — Deploy VIALOK</span>
       </div>
 
       <h2 class="font-black text-4xl md:text-6xl uppercase tracking-tight leading-none mb-6 reveal">
-        Schedule Your<br/>
-        <span class="text-electric glow-text">Free Audit.</span>
+        <span data-fr="Planifiez Votre" data-en="Schedule Your">Schedule Your</span><br/>
+        <span class="text-electric glow-text" data-fr="Audit Gratuit." data-en="Free Audit.">Free Audit.</span>
       </h2>
-      <p class="text-white/30 text-base leading-relaxed mb-12 max-w-xl reveal">
+      <p class="text-white/30 text-base leading-relaxed mb-12 max-w-xl reveal" data-fr="Nos ingénieurs évalueront vos opérations actuelles et concevront un déploiement pilote personnalisé de 50 unités. Aucun engagement. Transparence totale." data-en="Our engineers will assess your current operations and design a custom 50-unit pilot deployment. No commitment. Full transparency.">
         Our engineers will assess your current operations and design a custom 50-unit pilot deployment. No commitment. Full transparency.
       </p>
 
@@ -446,6 +456,8 @@
             <input
               type="text"
               placeholder="Company name"
+              data-placeholder-fr="Nom de l'entreprise"
+              data-placeholder-en="Company name"
               required
               class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
             />
@@ -454,6 +466,8 @@
             <input
               type="text"
               placeholder="Your name"
+              data-placeholder-fr="Votre nom"
+              data-placeholder-en="Your name"
               required
               class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
             />
@@ -463,6 +477,8 @@
           <input
             type="email"
             placeholder="Professional email"
+            data-placeholder-fr="Email professionnel"
+            data-placeholder-en="Professional email"
             required
             class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20"
           />
@@ -472,23 +488,25 @@
             class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white/40 text-sm focus:border-electric/50 focus:bg-white/5 transition-all duration-300 appearance-none cursor-pointer"
             style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.2)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1.25rem center; background-size: 1rem;"
           >
-            <option value="" disabled selected>Operation size</option>
-            <option class="bg-black text-white">Small — 1 warehouse (&lt;500 SKUs)</option>
-            <option class="bg-black text-white">Medium — 2–5 sites (500–10K SKUs)</option>
-            <option class="bg-black text-white">Large — 5+ sites (10K+ SKUs)</option>
-            <option class="bg-black text-white">Enterprise — Multi-country distribution</option>
+            <option value="" disabled selected data-fr="Taille de l'opération" data-en="Operation size">Operation size</option>
+            <option class="bg-black text-white" data-fr="Petite — 1 entrepôt (&lt;500 SKUs)" data-en="Small — 1 warehouse (&lt;500 SKUs)">Small — 1 warehouse (&lt;500 SKUs)</option>
+            <option class="bg-black text-white" data-fr="Moyenne — 2–5 sites (500–10K SKUs)" data-en="Medium — 2–5 sites (500–10K SKUs)">Medium — 2–5 sites (500–10K SKUs)</option>
+            <option class="bg-black text-white" data-fr="Grande — 5+ sites (10K+ SKUs)" data-en="Large — 5+ sites (10K+ SKUs)">Large — 5+ sites (10K+ SKUs)</option>
+            <option class="bg-black text-white" data-fr="Entreprise — Distribution multinationale" data-en="Enterprise — Multi-country distribution">Enterprise — Multi-country distribution</option>
           </select>
         </div>
         <div class="relative group">
           <textarea
             rows="4"
             placeholder="Describe your current challenge (optional)"
+            data-placeholder-fr="Décrivez votre défi actuel (optionnel)"
+            data-placeholder-en="Describe your current challenge (optional)"
             class="w-full bg-white/3 border border-white/10 px-5 py-4 text-white text-sm placeholder-white/20 focus:border-electric/50 focus:bg-white/5 transition-all duration-300 group-hover:border-white/20 resize-none"
           ></textarea>
         </div>
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-          <p class="text-white/15 text-xs leading-relaxed max-w-xs">
+          <p class="text-white/15 text-xs leading-relaxed max-w-xs" data-fr="Vos données sont chiffrées et jamais partagées. Réponse sous 24h." data-en="Your data is encrypted and never shared. Response within 24h.">
             Your data is encrypted and never shared. Response within 24h.
           </p>
           <button
@@ -500,7 +518,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
-            Request Audit
+            <span data-fr="Demander un Audit" data-en="Request Audit">Request Audit</span>
           </button>
         </div>
       </form>
@@ -514,8 +532,8 @@
             </svg>
           </div>
           <div>
-            <div class="text-white font-semibold text-sm">Request received.</div>
-            <div class="text-white/40 text-xs mt-0.5">Our team will reach out within 24 hours.</div>
+            <div class="text-white font-semibold text-sm" data-fr="Demande reçue." data-en="Request received.">Request received.</div>
+            <div class="text-white/40 text-xs mt-0.5" data-fr="Notre équipe vous contactera dans les 24 heures." data-en="Our team will reach out within 24 hours.">Our team will reach out within 24 hours.</div>
           </div>
         </div>
       </div>
@@ -532,12 +550,12 @@
         </div>
         <span class="text-white/40 font-bold text-sm tracking-[0.2em] uppercase">VIALOK</span>
       </div>
-      <p class="text-white/15 text-xs tracking-widest font-mono uppercase">
+      <p class="text-white/15 text-xs tracking-widest font-mono uppercase" data-fr="© 2026 VIALOK — Tous les systèmes opérationnels" data-en="© 2026 VIALOK — All systems operational">
         © 2026 VIALOK — All systems operational
       </p>
       <div class="flex items-center gap-6 text-white/20 text-xs tracking-widest uppercase">
-        <a href="#" class="hover:text-white/50 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-white/50 transition-colors">Legal</a>
+        <a href="#" class="hover:text-white/50 transition-colors" data-fr="Confidentialité" data-en="Privacy">Privacy</a>
+        <a href="#" class="hover:text-white/50 transition-colors" data-fr="Mentions Légales" data-en="Legal">Legal</a>
         <a href="mailto:contact@vialok.io" class="hover:text-electric transition-colors">contact@vialok.io</a>
       </div>
     </div>
@@ -585,14 +603,32 @@
 
   <script>
   function switchLang(lang) {
-    const elements = document.querySelectorAll('[data-fr]');
-    elements.forEach(el => {
-      el.innerText = el.getAttribute('data-' + lang);
+    // Reverse order = enfants traités avant parents → évite les nœuds détachés
+    const els = Array.from(document.querySelectorAll('[data-fr]')).reverse();
+    els.forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val === null) return;
+      try {
+        // textContent pour le texte pur (sûr, pas de parsing HTML)
+        // innerHTML seulement si la traduction contient du balisage
+        if (val.includes('<')) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      } catch (e) {
+        console.warn('[switchLang] Erreur sur élément :', el, e);
+      }
     });
 
+    // Placeholders des champs de formulaire
+    document.querySelectorAll('[data-placeholder-fr]').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang) || '';
+    });
+
+    // État visuel des boutons
     const btnFr = document.getElementById('lang-fr');
     const btnEn = document.getElementById('lang-en');
-
     if (lang === 'fr') {
       btnFr.className = "px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white";
       btnEn.className = "px-3 py-1 rounded-full text-xs font-bold text-gray-400 hover:text-white";
