@@ -725,31 +725,50 @@
 
     // Form submit — Formspree AJAX
     async function handleSubmit(e) {
-      e.preventDefault();
+      e.preventDefault(); // bloque la soumission native pendant la tentative AJAX
+
+      const FORMSPREE_URL = 'https://formspree.io/f/xgopjkep';
       const form = e.target;
       const btn = document.getElementById('submit-btn');
       const originalHTML = btn.innerHTML;
+
+      // Vérification de cohérence : l'action du form et l'URL fetch doivent correspondre
+      console.log('[Formspree] form.action :', form.action);
+      console.log('[Formspree] fetch URL   :', FORMSPREE_URL);
+      console.log('[Formspree] Champs envoyés :', Object.fromEntries(new FormData(form)));
 
       btn.disabled = true;
       btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Sending...`;
 
       try {
-        const response = await fetch('https://formspree.io/f/xgopjkep', {
+        const response = await fetch(FORMSPREE_URL, {
           method: 'POST',
           body: new FormData(form),
           headers: { 'Accept': 'application/json' }
         });
 
-        if (response.ok) {
+        // Parser le JSON pour détecter les erreurs Formspree dans le body
+        const data = await response.json();
+        console.log('[Formspree] Status HTTP :', response.status);
+        console.log('[Formspree] Réponse body :', data);
+
+        if (response.ok && !data.errors) {
+          console.log('[Formspree] ✓ Soumission réussie');
           form.style.display = 'none';
           document.getElementById('success-msg').classList.remove('hidden');
         } else {
-          throw new Error('Server error');
+          const errMsg = data.errors
+            ? data.errors.map(err => err.message).join(', ')
+            : `Erreur HTTP ${response.status}`;
+          console.error('[Formspree] ✗ Erreur :', errMsg);
+          throw new Error(errMsg);
         }
       } catch (err) {
+        console.error('[Formspree] ✗ Échec AJAX :', err.message, '→ fallback soumission native');
         btn.disabled = false;
         btn.innerHTML = originalHTML;
-        alert('Une erreur est survenue. Veuillez réessayer.');
+        // Fallback natif : soumet directement via l'attribut action du form (sans JS)
+        form.submit();
       }
     }
 
